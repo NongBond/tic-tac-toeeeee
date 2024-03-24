@@ -1,0 +1,10 @@
+.cell {
+  background-color: aqua;
+}
+
+.button_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 10px;
+}
