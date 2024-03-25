@@ -2,9 +2,17 @@ import "./board.css";
 type BoardProps = {
   board: Array<Array<string | null>>;
   handleClick: (row: number, col: number) => void;
+  winningPath: number[][] | null;
 };
 
-const Board = ({ board, handleClick }: BoardProps) => {
+const Board: React.FC<BoardProps> = ({ board, handleClick, winningPath }) => {
+  const isWinningCell = (row: number, col: number) => {
+    return (
+      winningPath &&
+      winningPath.some((path) => path[0] === row && path[1] === col)
+    );
+  };
+
   return (
     <div className="board">
       {board.map((row, rowIndex) => (
@@ -12,7 +20,9 @@ const Board = ({ board, handleClick }: BoardProps) => {
           {row.map((cell, cellIndex) => (
             <div
               key={cellIndex}
-              className="board_cell"
+              className={`board_cell ${
+                isWinningCell(rowIndex, cellIndex) ? "winning" : ""
+              }`}
               onClick={() => handleClick(rowIndex, cellIndex)}
             >
               {cell}
@@ -23,5 +33,4 @@ const Board = ({ board, handleClick }: BoardProps) => {
     </div>
   );
 };
-
 export default Board;

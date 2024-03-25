@@ -17,7 +17,7 @@ export function minimax(
   if (depth >= depthLimit) {
     return 0;
   }
-  const winner = checkWinner(board);
+  const winner = checkWinner(board)[0];
   if (winner !== null) {
     return scores[winner as "X" | "O" | "tie"];
   }
@@ -86,12 +86,14 @@ export function getBestMove(board: BoardArrayTypes): [number, number] {
     for (let j = 0; j < boardSize; j++) {
       if (board[i][j] === null) {
         board[i][j] = "O";
-        if (checkWinner(board) === "O") {
+        const winnerO = checkWinner(board)[0];
+        if (winnerO === "O") {
           return [i, j];
         }
 
         board[i][j] = "X";
-        if (checkWinner(board) === "X") {
+        const winnerX = checkWinner(board)[0];
+        if (winnerX === "X") {
           board[i][j] = null;
           moves.push([i, j]);
         } else {

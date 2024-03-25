@@ -22,3 +22,7 @@
   font-size: 24px;
   font-weight: bold;
 }
+
+.board_cell.winning {
+  background-color: gray;
+}

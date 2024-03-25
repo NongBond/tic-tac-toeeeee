@@ -35,6 +35,7 @@ const TicTacToe = () => {
   );
   const [player, setPlayer] = useState(Math.random() < 0.5 ? "X" : "O");
   const [winner, setWinner] = useState<string | null>(null);
+  const [winningPath, setWinningPath] = useState<number[][] | null>(null);
 
   useEffect(() => {
     if (isRecordingStop) {
@@ -131,9 +132,10 @@ const TicTacToe = () => {
           cellClick(row, col);
         }
       }
-      const newWinner = checkWinner(board);
+      const [newWinner, newWinningPath] = checkWinner(board);
       if (newWinner) {
         setWinner(newWinner);
+        setWinningPath(newWinningPath);
         setTimeout(() => {
           alert(`Winner is ${newWinner}`);
         }, 0);
@@ -161,7 +163,8 @@ const TicTacToe = () => {
   return (
     <div className="container">
       <h1>My Tic Tac Toe</h1>
-      <Board board={board} handleClick={cellClick} />
+      <Board board={board} handleClick={cellClick} winningPath={winningPath} />
+      {winner && <p className="winner-message">{winner} is the winner</p>}
       <div className="button_container">
         <button onClick={backToMain}>Back</button>
         <button onClick={resetGame}>Reset</button>
