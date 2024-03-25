@@ -163,7 +163,12 @@ const TicTacToe = () => {
   return (
     <div className="container">
       <h1>My Tic Tac Toe</h1>
-      <Board board={board} handleClick={cellClick} winningPath={winningPath} />
+      <Board
+        board={board}
+        handleClick={cellClick}
+        winningPath={winningPath}
+        currentPlayer={player}
+      />
       {winner && <p className="winner-message">{winner} is the winner</p>}
       <div className="button_container">
         <button onClick={backToMain}>Back</button>

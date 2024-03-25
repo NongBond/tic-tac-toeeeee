@@ -3,9 +3,15 @@ type BoardProps = {
   board: Array<Array<string | null>>;
   handleClick: (row: number, col: number) => void;
   winningPath: number[][] | null;
+  currentPlayer: string;
 };
 
-const Board: React.FC<BoardProps> = ({ board, handleClick, winningPath }) => {
+const Board: React.FC<BoardProps> = ({
+  board,
+  handleClick,
+  winningPath,
+  currentPlayer,
+}) => {
   const isWinningCell = (row: number, col: number) => {
     return (
       winningPath &&
@@ -24,6 +30,7 @@ const Board: React.FC<BoardProps> = ({ board, handleClick, winningPath }) => {
                 isWinningCell(rowIndex, cellIndex) ? "winning" : ""
               }`}
               onClick={() => handleClick(rowIndex, cellIndex)}
+              data-player={currentPlayer}
             >
               {cell}
             </div>

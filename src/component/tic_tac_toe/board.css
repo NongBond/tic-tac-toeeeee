@@ -23,6 +23,16 @@
   font-weight: bold;
 }
 
+.board_cell:hover {
+  background-color: lightgray;
+}
+
+.board_cell:hover::before {
+  content: attr(data-player);
+  position: absolute;
+  color: rgb(82, 78, 78);
+}
+
 .board_cell.winning {
   background-color: gray;
 }
